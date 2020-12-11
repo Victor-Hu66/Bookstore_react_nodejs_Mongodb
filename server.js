@@ -11,4 +11,4 @@ app.listen(5000, () => {
     console.log("I m listening on port 5000")
 })
 
-// try to ignore .env
+// 
