@@ -1,4 +1,5 @@
 const express = require("express");
+const { check } = require("express-validator");  // use this as a middleware
 const router = express.Router();
 const AuthController = require ("../controllers/AuthController")
 
@@ -11,7 +12,17 @@ const AuthController = require ("../controllers/AuthController")
  * @access Puclic 
  */
 
-router.post("/register", AuthController.authRegister)
+// router.post("/register",[mid1, mid2, mid3, ... ], AuthController.authRegister)
+
+router.post("/register", 
+[   // İf there is a password in the coming request than validate it!
+    check("password","Please enter a password with 6 and more chars").isLength(
+        {
+            min:6,
+        }
+    ),
+],
+AuthController.authRegister)
 /**
  * @route POST /api/auth/login
  * @desc  Login endpoint
