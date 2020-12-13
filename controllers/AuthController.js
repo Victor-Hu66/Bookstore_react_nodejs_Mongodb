@@ -7,6 +7,13 @@ exports.authRegister = async (req, res) => {
 
   // TODO1: Validate the fields
   // TODO2: check already registered
+  const userData = await User.findOne( { email } );
+  
+  if (userData) {
+    return res
+      .status(401)
+      .json ( { errors : [ {message : "user already exist!!" } ] } );
+  }
   
   // TODO3: crpyt password
   const salt = await bcrypt.genSalt(10);
