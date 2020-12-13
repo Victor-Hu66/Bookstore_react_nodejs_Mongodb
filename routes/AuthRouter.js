@@ -21,6 +21,7 @@ router.post("/register",
             min:6,
         }
     ),
+    check("email", "Please enter a valid email").isEmail(),
 ],
 AuthController.authRegister)
 /**
