@@ -13,5 +13,22 @@ exports.getProfileInfo = async (req, res) => {
 
 exports.updateProfileInfo = async (req, res) => {
     // TODO: update profile info
+
+    //* EKREM PR
+    // try {
+    //     const editInfo = req.body;
+    //     const user = await User.findByIdAndUpdate(req.user.userData._id, editInfo, {
+    //       new: true,
+    //       runValidators: true,
+    //     });
+    //     res.status(200).json({
+    //       success: true,
+    //       user,
+    //     });
+    //   } catch (err) {
+    //     console.error(err.message);
+    //     res.status(500).send("Server Error");
+    //   }
+
     res.send("profile updated")
 };
