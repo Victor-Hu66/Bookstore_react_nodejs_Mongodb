@@ -46,8 +46,18 @@ exports.authRegister = async (req, res) => {
 //! ------------------------------------------------------------------------------------------UserLogin
 
 exports.authLogin = (req, res) => {
+  const { email, password } = req.body;
+  
+    
+  // TODO1: Validate the fields---------------------------------------------------------
+  const validationErr = validationResult(req);
 
-  // TODO1: field validation
+    if (validationErr?.errors?.length > 0) {
+      return res.status(401).json ( { errors : validationErr.array() } );
+    }
+
+
+
   // TODO2: user exist?
   // TODO3: password compare
   // TODO4: authentication return JSON WEb TOKEN - JWT

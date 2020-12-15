@@ -32,7 +32,16 @@ AuthController.authRegister)
  * @access Public / Private   
  */
 
-router.post("/login", AuthController.authLogin)
+router.post("/login",
+[   // İf there is a password in the coming request than validate it!
+    check("password","Please enter a password with 6 and more chars").isLength(
+        {
+            min:6,
+        }
+    ),
+    check("email", "Please enter a valid email").isEmail(),
+],
+AuthController.authLogin)
 
 
 
