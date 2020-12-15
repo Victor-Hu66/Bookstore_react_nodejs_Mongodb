@@ -45,7 +45,7 @@ exports.authRegister = async (req, res) => {
 
 //! ------------------------------------------------------------------------------------------UserLogin
 
-exports.authLogin = (req, res) => {
+exports.authLogin = async (req, res) => {
   const { email, password } = req.body;
   
     
@@ -58,9 +58,25 @@ exports.authLogin = (req, res) => {
 
 
 
-  // TODO2: user exist?
-  // TODO3: password compare
-  // TODO4: authentication return JSON WEb TOKEN - JWT
+  // TODO2: user exist?-----------------------------------------------------------------
+  const userData = await User.findOne( { email } );
+  
+  if (!userData) {
+    return res
+      .status(401)
+      .json ( { errors : [ {message : "user does't exist!!" } ] } );
+  }
+
+  // TODO3: password compare------------------------------------------------------------
+  const isPasswordMatch = await bcrypt.compare(password, userData.password);
+  
+  if (!isPasswordMatch) {
+    return res
+      .status(401)
+      .json ( { errors : [ {message : "invalid credentials!!" } ] } );
+  }
+
+  // TODO4: authentication return JSON WEb TOKEN - JWT----------------------------------
   
   res.send("Login Completed");
 };
