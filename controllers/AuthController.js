@@ -1,7 +1,7 @@
 const User = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
 const {  validationResult } = require("express-validator");  
-
+var jwt = require("jsonwebtoken");
 
 
 //! --------------------------------------------------------------------------------------------UserRegister
@@ -77,6 +77,17 @@ exports.authLogin = async (req, res) => {
   }
 
   // TODO4: authentication return JSON WEb TOKEN - JWT----------------------------------
-  
+  jwt.sign({userData}, process.env.JWT_SECRET_KEY, {expiresIn: 3600}, (err, token) => {
+    if (err) {
+      return res
+        .status(401)
+        .json ( { errors : [ {message : "unknown error!" } ] } );
+    }
+    res.send(token)
+  });
+
+
+
+
   res.send("Login Completed");
 };
