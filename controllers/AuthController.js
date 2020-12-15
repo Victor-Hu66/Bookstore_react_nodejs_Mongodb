@@ -4,7 +4,7 @@ const {  validationResult } = require("express-validator");
 
 
 
-//! UserRegister--------------------------------------------------------------------------------------------
+//! --------------------------------------------------------------------------------------------UserRegister
 exports.authRegister = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   // console.log(req.body)
@@ -43,10 +43,14 @@ exports.authRegister = async (req, res) => {
   res.send("Register Completed.");
 };
 
-//! UserLogin------------------------------------------------------------------------------------------
+//! ------------------------------------------------------------------------------------------UserLogin
 
 exports.authLogin = (req, res) => {
-  // TODO: Auth.
-  // TODO: Login func.
+
+  // TODO1: field validation
+  // TODO2: user exist?
+  // TODO3: password compare
+  // TODO4: authentication return JSON WEb TOKEN - JWT
+  
   res.send("Login Completed");
 };

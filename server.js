@@ -3,7 +3,7 @@ require("dotenv").config();
 const connectDB = require("./models/connectDB");
 const app = express();
 
-app.use(express.json());
+app.use(express.json()); // using for sending data in req.body
 
 const router = require("./routes/router");
 
