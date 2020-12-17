@@ -2,6 +2,7 @@ const User = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
 const {  validationResult } = require("express-validator");  
 var jwt = require("jsonwebtoken");
+// const checkFunction = require('../helpers/checkFunction');
 
 
 //! --------------------------------------------------------------------------------------------UserRegister
@@ -15,6 +16,7 @@ exports.authRegister = async (req, res) => {
     if (validationErr?.errors?.length > 0) {
       return res.status(401).json ( { errors : validationErr.array() } );
     }
+    // checkFunction(res, validationErr?.errors?.length > 0, validationErr.array());
 
   // TODO2: check already registered----------------------------------------------------
   const userData = await User.findOne( { email } );
@@ -24,6 +26,7 @@ exports.authRegister = async (req, res) => {
       .status(401)
       .json ( { errors : [ {message : "user already exist!!" } ] } );
   }
+  // checkFunction(res, userData, "User already exists!!");
   
   // TODO3: crpyt password--------------------------------------------------------------
   const salt = await bcrypt.genSalt(10);
@@ -55,6 +58,7 @@ exports.authLogin = async (req, res) => {
     if (validationErr?.errors?.length > 0) {
       return res.status(401).json ( { errors : validationErr.array() } );
     }
+    // checkFunction(res, validationErr?.errors?.length > 0, validationErr.array());
 
 
 
@@ -66,6 +70,7 @@ exports.authLogin = async (req, res) => {
       .status(401)
       .json ( { errors : [ {message : "user does't exist!!" } ] } );
   }
+  // checkFunction(res, !userData, "User doesn't exists!!");
 
   // TODO3: password compare------------------------------------------------------------
   const isPasswordMatch = await bcrypt.compare(password, userData.password);
@@ -75,6 +80,7 @@ exports.authLogin = async (req, res) => {
       .status(401)
       .json ( { errors : [ {message : "invalid credentials!!" } ] } );
   }
+  // checkFunction(res, !isPasswordMatch, "Invalid credentials");
 
   // TODO4: authentication return JSON WEb TOKEN - JWT----------------------------------
   jwt.sign({userData}, process.env.JWT_SECRET_KEY, {expiresIn: 3600}, (err, token) => {
@@ -83,6 +89,7 @@ exports.authLogin = async (req, res) => {
         .status(401)
         .json ( { errors : [ {message : "unknown error!" } ] } );
     }
+    // checkFunction(res, err, "Unknown Error");
     res.send(token)
   });
 
