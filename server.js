@@ -9,12 +9,7 @@ const router = require("./routes/router");
 
 connectDB();
 
-
-
-
 app.use( "/api", router )
-
-
 
 
 app.listen(process.env.PORT, () => {
