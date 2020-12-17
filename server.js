@@ -1,15 +1,16 @@
 const express = require("express")
-require("dotenv").config();
-const connectDB = require("./models/connectDB");
 const app = express();
+require("dotenv").config();
+// const cors = require("cors");
+const connectDB = require("./models/connectDB");
 const port = process.env.PORT || 5000;
-
-app.use(express.json()); // using for sending data in req.body
-
 const router = require("./routes/router");
+
 
 connectDB();
 
+// app.use(cors());
+app.use(express.json()); // using for sending data in req.body
 app.use( "/api", router )
 
 
