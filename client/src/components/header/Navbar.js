@@ -5,6 +5,9 @@ import { Badge } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { AuthContext } from "../../context/AuthContext";
 
+TODO //?check this code bloc
+
+
 const { Header } = Layout;
 
 const Navbar = () => {
