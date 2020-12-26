@@ -14,6 +14,7 @@ const Navbar = () => {
   const { isLoggedIn, setLoggedIn } = useContext(AuthContext);
   const [current, setCurrent] = useState("home");
   const history = useHistory();
+  
 
   const handleLogoClick = (e) => {
     history.push(`/`);
